@@ -2,9 +2,9 @@
 
 QUARTER = "quarter"
 DIME = "dime"
-NICKEL = "nickel
+NICKEL = "nickel"
 
-COLA = "cola
+COLA = "cola"
 CANDY = "candy"
 CHIPS = "chips"
 
@@ -16,3 +16,8 @@ class VendingMachine:
         self.accepted_coins = []
         self.rejected_coins = []
         self.is_selected = None
+
+    def display(self):
+        if len(self.accepted_coins) == 0:
+            return "INSERT COINS"
+            
