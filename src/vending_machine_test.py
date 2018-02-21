@@ -47,5 +47,17 @@ class VendingMachineTests(unittest.TestCase):
         self.my_machine.take_coins(vending_machine.QUARTER)
         self.my_machine.take_coins(vending_machine.QUARTER)
         self.assertEqual(self.my_machine.display(), "THANK YOU")
+        self.assertEqual(self.my_machine.is_selected, None)
+
+    def test_return_change_when_more_money_than_needed_is_inserted(self):
+        self.my_machine.select_product(vending_machine.COLA)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.DIME)
+        self.my_machine.take_coins(vending_machine.DIME)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.assertEqual(self.my_machine.display(), "THANK YOU")
+        self.assertEqual(self.my_machine.returned_coins,['dime', 'dime'])
 
 unittest.main()

@@ -29,13 +29,16 @@ class VendingMachine:
             if self.is_selected in self.products:
                 return "PRICE " + format(self.products.get(self.is_selected), '.2f')
         elif self.is_selected != None and len(self.accepted_coins) != None:
-
             if (self.products.get(self.is_selected) - sum(self.accepted_coins)) > 0 :
-
                 return "PRICE " + format((self.products.get(self.is_selected) - sum(self.accepted_coins)), '.2f')
-
             elif (self.products.get(self.is_selected) - sum(self.accepted_coins)) == 0 :
+                self.is_selected = None
+                return "THANK YOU"
 
+            else:
+                change = abs(self.products.get(self.is_selected) - sum(self.accepted_coins))
+                change = round(change, 1)
+                self.make_change(change)
                 return "THANK YOU"
         
         
@@ -46,7 +49,15 @@ class VendingMachine:
             self.accepted_coins.append(coin)
         else:
             self.rejected_coins.append(coin)
+
+
+    def make_change(self, change):
+        while change > .05:
+            change = change - .10
+            self.returned_coins.append(DIME)
+        while change > 0:
+            change = change - .5
+            self.returned_coins.append(NICKEL)
             
-        
         
         
