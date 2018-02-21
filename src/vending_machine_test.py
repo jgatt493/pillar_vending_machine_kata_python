@@ -15,4 +15,12 @@ class VendingMachineTests(unittest.TestCase):
         self.my_machine.select_product(vending_machine.COLA)
         self.assertEqual(self.my_machine.display(),"PRICE 1.00")
 
+    def test_when_chips_is_selected_displays_PRICE_amount(self):
+        self.my_machine.select_product(vending_machine.CHIPS)
+        self.assertEqual(self.my_machine.display(),"PRICE 0.50")
+
+    def test_when_candy_is_selected_displays_PRICE_amount(self):
+        self.my_machine.select_product(vending_machine.CANDY)
+        self.assertEqual(self.my_machine.display(),"PRICE 0.65")
+
 unittest.main()

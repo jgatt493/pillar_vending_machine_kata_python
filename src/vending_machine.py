@@ -12,7 +12,7 @@ class VendingMachine:
 
     def __init__(self):
         self.products = {COLA : 1.00, CHIPS : .50, CANDY : .65}
-        self.valid_coins = {QUARTER : .25, DIME : .10, NICKEL : .5}
+        self.valid_coins = {QUARTER : 0.25, DIME : 0.10, NICKEL : 0.5}
         self.accepted_coins = []
         self.rejected_coins = []
         self.is_selected = None
