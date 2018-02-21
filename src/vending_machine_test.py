@@ -27,4 +27,18 @@ class VendingMachineTests(unittest.TestCase):
         self.my_machine.select_product(vending_machine.COLA)
         self.my_machine.take_coins(vending_machine.QUARTER)
         self.assertEqual(self.my_machine.display(), "PRICE 0.75")
+
+    def test_when_dime_is_entered_after_quarter_price_is_updated(self):
+        self.my_machine.select_product(vending_machine.COLA)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.DIME)
+        self.assertEqual(self.my_machine.display(), "PRICE 0.65")
+
+    def test_when_invalid_coin_is_given_display_says_INVALID_COIN(self):
+        self.my_machine.select_product(vending_machine.COLA)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.PENNY)
+        self.assertEqual(self.my_machine.display(), "PRICE 0.75")
+        
+
 unittest.main()
