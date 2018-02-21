@@ -18,6 +18,10 @@ class VendingMachine:
         self.is_selected = None
 
     def display(self):
-        if len(self.accepted_coins) == 0:
+        if len(self.accepted_coins) == 0 and self.is_selected == None:
             return "INSERT COINS"
-            
+        if self.is_selected != None:
+            return "PRICE ", 
+
+test = VendingMachine()
+    
