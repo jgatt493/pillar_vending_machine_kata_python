@@ -16,6 +16,7 @@ class VendingMachine:
         self.valid_coins = {QUARTER : 0.25, DIME : 0.10, NICKEL : 0.5}
         self.accepted_coins = []
         self.rejected_coins = []
+        self.returned_coins = []
         self.is_selected = None
 
     def select_product(self, product):
@@ -28,7 +29,15 @@ class VendingMachine:
             if self.is_selected in self.products:
                 return "PRICE " + format(self.products.get(self.is_selected), '.2f')
         elif self.is_selected != None and len(self.accepted_coins) != None:
-            return "PRICE " + format((self.products.get(self.is_selected) - sum(self.accepted_coins)), '.2f')
+
+            if (self.products.get(self.is_selected) - sum(self.accepted_coins)) > 0 :
+
+                return "PRICE " + format((self.products.get(self.is_selected) - sum(self.accepted_coins)), '.2f')
+
+            elif (self.products.get(self.is_selected) - sum(self.accepted_coins)) == 0 :
+
+                return "THANK YOU"
+        
         
     def take_coins(self, coin):
         if coin in self.valid_coins:

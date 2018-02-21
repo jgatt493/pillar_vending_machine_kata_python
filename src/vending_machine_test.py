@@ -39,6 +39,13 @@ class VendingMachineTests(unittest.TestCase):
         self.my_machine.take_coins(vending_machine.QUARTER)
         self.my_machine.take_coins(vending_machine.PENNY)
         self.assertEqual(self.my_machine.display(), "PRICE 0.75")
-        
+
+    def test_when_exact_amount_is_given_display_says_THANK_YOU_and_product_is_dispensed(self):
+        self.my_machine.select_product(vending_machine.COLA)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.assertEqual(self.my_machine.display(), "THANK YOU")
 
 unittest.main()
