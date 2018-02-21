@@ -23,4 +23,8 @@ class VendingMachineTests(unittest.TestCase):
         self.my_machine.select_product(vending_machine.CANDY)
         self.assertEqual(self.my_machine.display(),"PRICE 0.65")
 
+    def test_when_quarter_is_selected_price_is_updated(self):
+        self.my_machine.select_product(vending_machine.COLA)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.assertEqual(self.my_machine.display(), "PRICE 0.75")
 unittest.main()

@@ -23,7 +23,17 @@ class VendingMachine:
     def display(self):
         if len(self.accepted_coins) == 0 and self.is_selected == None:
             return "INSERT COINS"
-        if self.is_selected != None:
+        elif self.is_selected != None and self.accepted_coins == None:
             if self.is_selected in self.products:
                 return "PRICE " + format(self.products.get(self.is_selected), '.2f')
-test = VendingMachine()
+        elif self.is_selected != None and self.accepted_coins != None:
+            return "PRICE " + format((self.products.get(self.is_selected) - sum(self.accepted_coins)), '.2f')
+        
+    def take_coins(self, coin):
+        cost = self.products.get(self.is_selected)
+        coin = self.valid_coins.get(coin)
+        self.accepted_coins.append(coin)
+        
+        
+        
+        
