@@ -49,25 +49,29 @@ class VendingMachine:
     
     def display(self):
 
-        """No selection has been made, no money has been inserted"""
+        #No money inserted, no selection
         if len(self.accepted_coins) == 0 and self.is_selected == None:
             if self.exact_change == False:
                 return "INSERT COINS"
             else:
                 return "EXACT CHANGE ONLY"
 
-        elif self.is_selected is None and len(self.accepted_coins) == None:
+        #Selection has been made, no money
+        elif self.is_selected != None and len(self.accepted_coins) == None:
             if self.is_selected in self.products:             
                 return "PRICE " + format(self.products.get(self.is_selected), '.2f')
 
+        #Selection has been made, money has been inserted
         elif self.is_selected != None and len(self.accepted_coins) != None:
             if (self.products.get(self.is_selected) - sum(self.accepted_coins)) > 0 :
                 return "PRICE " + format((self.products.get(self.is_selected) - sum(self.accepted_coins)), '.2f')
 
+            #Paid in full, no change
             elif (self.products.get(self.is_selected) - sum(self.accepted_coins)) == 0 :
                 self.is_selected = None
                 return "THANK YOU"
 
+            #Paid in full, change required
             else:
                 change = abs(self.products.get(self.is_selected) - sum(self.accepted_coins))
                 change = round(change, 1)
@@ -101,6 +105,7 @@ class VendingMachine:
         while change > 0:
             change = change - .5
             self.returned_coins.append(NICKEL)
+
     """Returns coins when user presses return button
     Sorts through accepted coin list and appends them to returned_coins
     Had to add for loop to convert values back to coin names
