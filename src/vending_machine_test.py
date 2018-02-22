@@ -74,6 +74,7 @@ class VendingMachineTests(unittest.TestCase):
     def test_wehn_product_is_sold_out_shows_SOLD_OUT_then_shows_INSERT_COINS(self):
         self.my_machine.product_stock[vending_machine.COLA] = False
         self.assertEqual(self.my_machine.select_product(vending_machine.COLA), "SOLD OUT")
+        self.assertEqual(self.my_machine.display(),"INSERT COINS")
         
 
 unittest.main()
