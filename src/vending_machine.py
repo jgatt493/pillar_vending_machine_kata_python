@@ -29,6 +29,8 @@ class VendingMachine:
         self.rejected_coins = []
         self.returned_coins = []
         self.is_selected = None
+        self.exact_change = False
+        
 
 
     """Sets the selected product"""
@@ -41,18 +43,22 @@ class VendingMachine:
     """
     
     def display(self):
-        
+
+        """No selection has been made, no money has been inserted"""
         if len(self.accepted_coins) == 0 and self.is_selected == None:
-            return "INSERT COINS"
-        
-        elif self.is_selected != None and len(self.accepted_coins) == None:
+            if self.exact_change == False:
+                return "INSERT COINS"
+            else:
+                return "EXACT CHANGE ONLY"
+
+        elif self.is_selected is None and len(self.accepted_coins) == None:
             if self.is_selected in self.products:             
                 return "PRICE " + format(self.products.get(self.is_selected), '.2f')
 
         elif self.is_selected != None and len(self.accepted_coins) != None:
             if (self.products.get(self.is_selected) - sum(self.accepted_coins)) > 0 :
                 return "PRICE " + format((self.products.get(self.is_selected) - sum(self.accepted_coins)), '.2f')
-            
+
             elif (self.products.get(self.is_selected) - sum(self.accepted_coins)) == 0 :
                 self.is_selected = None
                 return "THANK YOU"
@@ -63,7 +69,10 @@ class VendingMachine:
                 self.make_change(change)
                 return "THANK YOU"
         
-        
+    """Takes one parameter coin, checks that coin is valid
+    If valid, append to accepted coins
+    If invalid, append to invalid coins
+    """
     def take_coins(self, coin):
         
         if coin in self.valid_coins:
@@ -75,6 +84,10 @@ class VendingMachine:
             self.rejected_coins.append(coin)
 
 
+    """Takes one paramter change, that is the excess money inserted
+    Returns proper change in the largest coins possible
+    Appends coins to returned_coins
+    """
     def make_change(self, change):
         while change > .05:
             change = change - .10
@@ -83,7 +96,10 @@ class VendingMachine:
         while change > 0:
             change = change - .5
             self.returned_coins.append(NICKEL)
-
+    """Returns coins when user presses return button
+    Sorts through accepted coin list and appends them to returned_coins
+    Had to add for loop to convert values back to coin names
+    """
     def return_coins(self):
         for i in self.accepted_coins:
             if i == .25:

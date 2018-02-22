@@ -67,4 +67,8 @@ class VendingMachineTests(unittest.TestCase):
         self.my_machine.return_coins()
         self.assertEqual(self.my_machine.returned_coins,['quarter', 'dime'])
 
+    def test_when_exact_change_is_required_display_shows_EXACT_CHANGE_ONLY(self):
+        self.my_machine.exact_change = True
+        self.assertEqual(self.my_machine.display(), "EXACT CHANGE ONLY")
+
 unittest.main()
