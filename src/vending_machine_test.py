@@ -60,4 +60,11 @@ class VendingMachineTests(unittest.TestCase):
         self.assertEqual(self.my_machine.display(), "THANK YOU")
         self.assertEqual(self.my_machine.returned_coins,['dime', 'dime'])
 
+    def test_return_coins_when_customer_selects_return_coins(self):
+        self.my_machine.select_product(vending_machine.COLA)
+        self.my_machine.take_coins(vending_machine.QUARTER)
+        self.my_machine.take_coins(vending_machine.DIME)
+        self.my_machine.return_coins()
+        self.assertEqual(self.my_machine.returned_coins,['quarter', 'dime'])
+
 unittest.main()
