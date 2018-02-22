@@ -14,6 +14,7 @@ class VendingMachine:
     """A representation of a vending machine.
 
     products: dictionary of products mapped to their costs
+    product_stock: dictionary of products mapped to their stock
     valid_coins: dictionary oof coins mapped to their values
     accpeted_coins: list for holding accepted coins
     rejecte_coins: list for holding rejected coins
@@ -24,6 +25,7 @@ class VendingMachine:
     def __init__(self):
         
         self.products = {COLA : 1.00, CHIPS : .50, CANDY : .65}
+        self.product_stock = {COLA : True, CHIPS : True, CANDY : True}
         self.valid_coins = {QUARTER : 0.25, DIME : 0.10, NICKEL : 0.5}
         self.accepted_coins = []
         self.rejected_coins = []
@@ -31,12 +33,15 @@ class VendingMachine:
         self.is_selected = None
         self.exact_change = False
         
+        
 
 
     """Sets the selected product"""
     def select_product(self, product):
-        
-        self.is_selected = product
+        if self.product_stock[product] == False:
+            return "SOLD OUT"
+        else:
+            self.is_selected = product
 
     """Displays based on current state of the system. Uses if elif statements to check if
     money has been inserted, if a selection has been made, and if enough money has been inserted.
